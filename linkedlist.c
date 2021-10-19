@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <string.h>
 
 struct virus{
@@ -39,20 +38,29 @@ struct virus *insert_front(struct virus *current, int new_int, char *new_name){
 struct virus *free_list(struct virus *free_virus){
   struct virus *first = free_virus;
   struct virus *temp;
-  while (free_virus != NULL) {
+  while (free_virus) {
     temp = free_virus;
-    free_virus = free_virus -> next;
     free(temp);
+    free_virus = free_virus -> next;
   }
   return first;
 }
-int main(){
-  srand(time(NULL));
-  int r = rand() % 100 + 1;
-  struct virus *i = mutate_virus(r, "Oonga Boonga");
-  r = rand() % 100 + 1;
-  struct virus *j = insert_front(i, r, "Boonga Oonga");
-  print_list(j);
-  free_list(j);
-  return 0;
+
+struct virus *remove_node(struct virus *front, int data){
+  struct virus *first = front;
+  struct virus *temp;
+  int tmp = 1;
+  while (front){
+    if (front -> i == data && tmp != 1){
+      temp -> next = front -> next;
+    }
+    if (front -> i == data && tmp == 1){
+      temp = front -> next;
+      first = temp;
+    }
+    temp = front;
+    front = front -> next;
+    tmp++;
+  }
+  return first;
 }
