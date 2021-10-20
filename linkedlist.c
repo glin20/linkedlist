@@ -43,7 +43,7 @@ struct virus *free_list(struct virus *free_virus){
     free(temp);
     free_virus = free_virus -> next;
   }
-  return first;
+  return NULL;
 }
 
 struct virus *remove_node(struct virus *front, int data){
@@ -53,10 +53,12 @@ struct virus *remove_node(struct virus *front, int data){
   while (front){
     if (front -> i == data && tmp != 1){
       temp -> next = front -> next;
+      free(front
     }
     if (front -> i == data && tmp == 1){
       temp = front -> next;
       first = temp;
+      free(front);
     }
     temp = front;
     front = front -> next;
